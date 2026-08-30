@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IncidentLens</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>IncidentLens</h1>
+    <p class="subtitle">Event log, incidents &amp; AI diagnostics</p>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="events">События</button>
+    <button class="tab" data-tab="incidents">Инциденты</button>
+    <button class="tab" data-tab="diagnosis">Диагностика</button>
+  </nav>
+
+  <!-- Раздел 1: События -->
+  <section id="tab-events" class="panel active">
+    <div class="toolbar">
+      <label>
+        Сервис
+        <select id="filter-service">
+          <option value="">Все</option>
+        </select>
+      </label>
+      <label>
+        Уровень
+        <select id="filter-level">
+          <option value="">Все</option>
+          <option value="info">info</option>
+          <option value="warning">warning</option>
+          <option value="error">error</option>
+        </select>
+      </label>
+      <button id="btn-refresh-events">Обновить</button>
+      <button id="btn-create-incident" class="primary" disabled>
+        Создать инцидент из выбранных (<span id="selected-count">0</span>)
+      </button>
+    </div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="select-all-events"></th>
+          <th>ts / created_at</th>
+          <th>service</th>
+          <th>level</th>
+          <th>message</th>
+          <th>event_id</th>
+        </tr>
+      </thead>
+      <tbody id="events-tbody"></tbody>
+    </table>
+  </section>
+
+  <!-- Раздел 2: Инциденты -->
+  <section id="tab-incidents" class="panel">
+    <div class="card">
+      <h2>Создать инцидент</h2>
+      <form id="form-incident">
+        <label>
+          Название
+          <input type="text" id="incident-title" placeholder="Краткое описание проблемы" required>
+        </label>
+        <label>
+          event_ids (через запятую)
+          <input type="text" id="incident-event-ids" placeholder="uuid1, uuid2">
+        </label>
+        <button type="submit" class="primary">Создать инцидент</button>
+      </form>
+    </div>
+    <h2>Последние инциденты</h2>
+    <div id="incidents-list"></div>
+    <div id="incident-detail" class="card hidden">
+      <h3 id="incident-detail-title"></h3>
+      <div id="incident-events"></div>
+      <button id="btn-run-diagnosis" class="primary">Запустить диагностику</button>
+    </div>
+  </section>
+
+  <!-- Раздел 3: Диагностика -->
+  <section id="tab-diagnosis" class="panel">
+    <div id="diagnosis-empty" class="empty-state">
+      Запустите диагностику из раздела «Инциденты».
+    </div>
+    <div id="diagnosis-result" class="hidden">
+      <div class="card">
+        <h2>Гипотеза причины</h2>
+        <p id="diag-hypothesis" class="hypothesis"></p>
+      </div>
+      <div class="card">
+        <h2>Уверенность</h2>
+        <span id="diag-confidence" class="badge"></span>
+        <span id="diag-review-badge" class="badge review hidden">требует проверки</span>
+      </div>
+      <div class="card">
+        <h2>Следующие шаги</h2>
+        <ol id="diag-steps"></ol>
+      </div>
+      <div id="diag-review-block" class="card review-block hidden">
+        <h2>Каких данных не хватает</h2>
+        <ul id="diag-missing"></ul>
+        <p class="hint">Добавьте логи, метрики и stack trace для уточнения диагностики.</p>
+      </div>
+    </div>
+  </section>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

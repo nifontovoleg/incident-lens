@@ -1,0 +1,10 @@
+{"service":"demo","level":"info","message":"Сервис demo запущен, версия 1.2.0","ts":null}
+{"service":"demo","level":"info","message":"Проверка здоровья: все компоненты OK","ts":null}
+{"service":"demo","level":"warning","message":"Медленный ответ API /users: 2.3s (порог 1s)","ts":null}
+{"service":"demo","level":"info","message":"Фоновая задача sync завершена успешно","ts":null}
+{"service":"demo","level":"warning","message":"Повторный retry запроса к cache, attempt 2/3","ts":null}
+{"service":"demo","level":"info","message":"Health check passed: db, redis, queue","ts":null}
+{"service":"demo","level":"error","message":"DB locked: unable to acquire write lock on table events","ts":null}
+{"service":"demo","level":"error","message":"Timeout to external service payment-gateway after 30s","ts":null}
+{"service":"demo","level":"error","message":"ValueError in parser: invalid JSON at line 42","ts":null}
+{"service":"demo","level":"invalid","message":"","ts":null}
