@@ -14,6 +14,8 @@
 
 Repository: [nifontovoleg/incident-lens](https://github.com/nifontovoleg/incident-lens)
 
+Demo: [YouTube](https://youtu.be/spOQg0AX-nA)
+
 ---
 
 ## Why this exists
